@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from 'r
 import tw from 'tailwind-react-native-classnames';
 import NavOptions from '../components/NavOptions';
 import { useNavigation } from '@react-navigation/native';
-import CustTabs from '../navbar/CustTabs';
+
 
 const HomeScreen = () => {
     const navigation = useNavigation();
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
-        <CustTabs/>
+        
         <View style={tw`p-10`}>
             <Image
                 style={{
