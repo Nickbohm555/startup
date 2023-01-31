@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustRestaurantsScreen from './CustRestaurantsScreen';
 import RewardsScreen from './RewardsScreen';
 import CustRankingsScreen from './CustRankingsScreen';
-import AccountScreen from './AccountScreen';
+import AccountScreen from './CustAccountScreen';
 import BottomTab from '../navbar/BottomTab';
 import SideTab from '../navbar/SideTab';
 

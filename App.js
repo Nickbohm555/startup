@@ -16,7 +16,7 @@ import CongratsScreen from './screens/CongratsScreen';
 import SignInScreen from './screens/SignInScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import RewardsScreen from './screens/RewardsScreen';
-import AccountScreen from './screens/AccountScreen';
+import CustAccountScreen from './screens/CustAccountScreen';
 import CustRestaurantsScreen from './screens/CustRestaurantsScreen';
 import CustRankingsScreen from './screens/CustRankingsScreen';
 import CustRestaurantDetailsScreen from './screens/CustRestaurantDetailsScreen';
@@ -24,6 +24,8 @@ import CustRequestConfirmationScreen from './screens/CustRequestConfirmationScre
 import CustPayWithRewardsScreen from './screens/CustPayWithRewardsScreen';
 import CustPayWithRewardsMetaMaskScreen from './screens/CustPayWithRewardsMetaMaskScreen';
 import CustPaymentConfirmationScreen from './screens/CustPaymentConfirmationScreen';
+import CustHome from './screens/CustHome';
+import CustHelpScreen from './screens/CustHelpScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -141,8 +143,8 @@ export default function App() {
               }}
             />
             <Stack.Screen 
-              name="AccountScreen" 
-              component={AccountScreen} 
+              name="CustAccountScreen" 
+              component={CustAccountScreen} 
               options={{
                 headerShown: true,
               }}
@@ -196,13 +198,20 @@ export default function App() {
                 headerShown: true,
               }}
             />
-            {/* <Stack.Screen 
-              name="HomeScreen"
-              component={Home} 
+            <Stack.Screen 
+              name="CustHome"
+              component={CustHome} 
               options={{
                 headerShown: true,
               }}
-            /> */}
+            />
+            <Stack.Screen 
+              name="CustHelpScreen"
+              component={CustHelpScreen} 
+              options={{
+                headerShown: true,
+              }}
+            />
           </Stack.Navigator>
         </SafeAreaProvider>
       </NavigationContainer>
