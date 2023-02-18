@@ -1,41 +1,102 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
+import CustTopBar from '../components/CustTopBar';
+import CustBottomBar from '../components/CustBottomBar';
 
 const CustRequestConfirmationScreen = () => {
     const navigation = useNavigation();
     return (
-        <View>
-            <View style={tw`h-1/2 p-1`}>
-            <Image
-                style={{
-                    width: 150,
-                    height: 150,
-                    resizeMode: "contain",
-                    alignSelf: "center",
-                }}
-                source={require("../images/CEATY_Logo.png")}
-            />
-            <Text style={tw`text-4xl font-bold text-center`}>Request Confirmation</Text>
-            <Image
-                style={{
-                    width: 75,
-                    height: 75,
-                    alignSelf: "center",
-                }}
-                source={require("../images/congrats_icon.png")}
-            />
-            <Text style={tw`m-10 text-lg text-center`}>You successfully signed up for CEATY. Use the app while you are visiting the restaurant and start earning rewards!</Text>
-        </View>
-            <View style={tw`h-1/2`}>
-                <TouchableOpacity 
-                    onPress={() => navigation.navigate('CustRequestConfirmationScreen')}
-                    style={tw`mt-5 bg-yellow-500 font-bold py-2 px-4 rounded-full`}>
-                        <Text style={tw`text-white text-lg font-bold text-center`}>Done</Text>
-                </TouchableOpacity>
+        <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
+            <View style={tw`absolute inset-x-0 top-0`}>
+                <CustTopBar />
             </View>
-        </View>
+        
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingTop: 150,
+                }}>
+                <Text
+                    style={{
+                        fontSize: 15,
+                        paddingLeft: 15,
+                        paddingTop: 20,
+                    }}>Your check amount</Text>
+                <Text
+                    style={{
+                        fontSize: 15,                        
+                        paddingTop: 20,
+                        paddingRight: 15,
+                    }}>$50.00</Text> 
+            </View>
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                borderBottomWidth: 2,
+                }}>
+                <Text
+                    style={{
+                        fontSize: 15,
+                        paddingLeft: 15,
+                        paddingTop: 20,
+                    }}>Restaurant reward rate</Text>
+                <Text
+                    style={{
+                        fontSize: 15,                        
+                        paddingTop: 20,
+                        paddingRight: 15,
+                        paddingBottom: 15,
+                    }}>10%</Text> 
+            </View>
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingBottom: 40,
+                }}>
+                <Text
+                    style={{
+                        fontSize: 15,
+                        paddingLeft: 15,
+                        paddingTop: 15,
+                        fontWeight: "bold",
+                    }}>Estimated rewards to be earned</Text>
+                <Text
+                    style={{
+                        fontSize: 15,                        
+                        paddingTop: 20,
+                        paddingRight: 15,
+                        fontWeight: "bold",
+                    }}>$5.00</Text> 
+            </View>
+            <View>
+                <Text
+                    style={{
+                        fontSize: 15,                        
+                        paddingTop: 20,
+                        paddingLeft: 20,
+                        paddingRight: 20,
+                    }}>Please show below confirmation code to the restaurant responsible when solicited. You will receive the rewards after restaurant checks and confirms your request.</Text>
+            </View>
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                }}>
+                <Text
+                    style={{
+                        fontSize: 80,                        
+                        paddingTop: 100,
+                        paddingLeft: 20,
+                        paddingRight: 20,
+                        fontWeight: "bold",
+                    }}>123-456</Text>
+            </View>
+
+            <View style={tw`absolute inset-x-0 bottom-0`}>
+                <CustBottomBar />
+            </View>
+        </SafeAreaView>
     )
 }
 

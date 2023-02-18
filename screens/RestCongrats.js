@@ -4,7 +4,7 @@ import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const CongratsScreen = () => {
+const RestCongrats = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView 
@@ -33,11 +33,11 @@ const CongratsScreen = () => {
                 padding: 40,
                 color: "black",
                 textAlign: "center",
-                }}>You successfully signed up for CEATY. Use the app while you are visiting the restaurant and start earning rewards!</Text>
+                }}>We received your sign-up request. CEATY team will reach out to you ASAP to verify your ID. Once you are verified, you will be able to launch your campaigns!</Text>
         </View>
             <View style={tw`h-1/2`}>
                 <TouchableOpacity 
-                    onPress={() => navigation.navigate('SignInScreen')}
+                    onPress={() => navigation.navigate('RestSignIn')}
                     style={{
                         backgroundColor: "#FFA24C",
                         marginTop: 250,
@@ -53,6 +53,6 @@ const CongratsScreen = () => {
     )
 }
 
-export default CongratsScreen
+export default RestCongrats
 
 const styles = StyleSheet.create({})

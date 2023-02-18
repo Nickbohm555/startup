@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInpu
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import CustRewardsRow from '../components/CustRewardsRow';
+import CustTopBar from '../components/CustTopBar';
+import CustBottomBar from '../components/CustBottomBar';
 
 const RewardsScreen = () => {
     const navigation = useNavigation();
@@ -10,8 +12,20 @@ const RewardsScreen = () => {
 
     return (
         <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
-            <View style={tw`mt-5 bg-gray-300 ml-5 mr-5 rounded-md`}>
-                <View style={tw`mt-5 ml-2 mr-2 bg-yellow-100 rounded-md flex-row justify-between`}>
+            <View style={tw`absolute inset-x-0 top-0`}>
+                <CustTopBar />
+            </View>
+            <View style={tw`mt-20 bg-gray-300 ml-5 mr-5 rounded-md`}>
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    backgroundColor: "#B4BA92",
+                    borderRadius: 10,
+                    padding: 5
+                    }}>
                     <Text style={{
                     fontSize: 15,
                     color: "black",
@@ -27,7 +41,16 @@ const RewardsScreen = () => {
                     paddingRight: 10,
                     }}>$58.80</Text>
                 </View>
-                <View style={tw`mt-5 ml-2 mr-2 bg-yellow-300 rounded-md flex-row justify-between`}>
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    backgroundColor: "#FFB19A",
+                    borderRadius: 10,
+                    padding: 5
+                    }}>
                     <Text style={{
                     fontSize: 15,
                     color: "black",
@@ -43,7 +66,16 @@ const RewardsScreen = () => {
                     paddingRight: 10,
                     }}>$30.00</Text>
                 </View>
-                <View style={tw`mt-5 ml-2 mr-2 bg-yellow-300 rounded-md flex-row justify-between`}>
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    backgroundColor: "#FFB19A",
+                    borderRadius: 10,
+                    padding: 5
+                    }}>
                     <Text style={{
                     fontSize: 15,
                     color: "black",
@@ -59,7 +91,16 @@ const RewardsScreen = () => {
                     paddingRight: 10,
                     }}>$58.80</Text>
                 </View>
-                <View style={tw`mt-5 ml-2 mr-2 mb-5 bg-yellow-100 rounded-md flex-row justify-between`}>
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    backgroundColor: "#959C63",
+                    borderRadius: 10,
+                    padding: 5
+                    }}>
                     <Text style={{
                     fontSize: 15,
                     color: "black",
@@ -78,19 +119,27 @@ const RewardsScreen = () => {
                 <Text
                     style={{
                     fontSize: 18,
+                    paddingTop: 10,
                     paddingLeft: 20,
                     fontWeight: "bold",
                     }}>Rewards withdrawal</Text>
                     <TextInput
-                    style={tw`ml-5 mr-5 mt-1 mb-5 bg-white text-left text-sm border-2 border-yellow-500 py-2 px-4 rounded-md`}
+                    style={tw`ml-5 mr-5 mt-1 mb-5 bg-white text-left text-sm p-4 rounded-md`}
                     placeholder="Enter the amount you want to withdraw"
                     placeholderTextColor="#36485f"
                     underlineColorAndroid={'transparent'}
                     />
                 <TouchableOpacity 
-                        onPress={() => navigation.navigate('DashboardScreen')}
-                        style={tw`ml-5 mr-5 mt-1 mb-5 bg-white border-2 border-yellow-500 font-bold py-2 px-4 rounded-full`}>
-                            <Text style={tw`text-black text-lg font-bold text-center`}>Withdraw rewards</Text>
+                        onPress={() => navigation.navigate('RewardsScreen')}
+                        style={{
+                            backgroundColor: "#BA951F",
+                            padding: 10,
+                            borderRadius: 50,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            marginBottom: 10,
+                        }}>
+                            <Text style={tw`text-white text-xl font-bold text-center`}>Withdraw rewards</Text>
                 </TouchableOpacity>
             </View>
             <View style={tw`mt-5`}>
@@ -160,6 +209,9 @@ const RewardsScreen = () => {
             </View>
             </View>
             </ScrollView>
+            <View style={tw`absolute inset-x-0 bottom-0`}>
+            <CustBottomBar />
+            </View>
         </SafeAreaView>
     )
 }

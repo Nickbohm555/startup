@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import CustHelpScreen from "../screens/CustHelpScreen";
 import HomeScreen from "../screens/HomeScreen";
+import CustHome from "../screens/CustHome";
 
 
 const Drawer = createDrawerNavigator();
@@ -22,7 +23,7 @@ const SideTab = () => {
             }}>
             <Drawer.Screen 
                 name='Main' 
-                component={BottomTab}
+                component={CustHome}
                 options={{ drawerIcon: makeIconRender("home"),
                 headerShown: false}} />
             <Drawer.Screen 

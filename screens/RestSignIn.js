@@ -4,7 +4,7 @@ import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import NavOptions from '../components/NavOptions';
 
-const SignInScreen = () => {
+const RestSignIn = () => {
     const navigation = useNavigation();
     return (
         <View style={tw`flex-1`}>
@@ -24,7 +24,7 @@ const SignInScreen = () => {
                 />
                 <Text style={tw`mt-2 mb-20 text-2xl font-semibold text-center`}>The first borderless Web3 restaurant loyalty app</Text>
                 <TouchableOpacity 
-                    onPress={() => navigation.navigate('CustHome')}
+                    onPress={() => navigation.navigate('RestHome')}
                     style={{
                         backgroundColor: "#C9CEB1",
                         marginTop: 50,
@@ -65,6 +65,6 @@ const SignInScreen = () => {
   )
 }
 
-export default SignInScreen
+export default RestSignIn
 
 const styles = StyleSheet.create({})

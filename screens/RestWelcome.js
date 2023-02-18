@@ -11,22 +11,22 @@ const { width } = Dimensions.get('window');
 const data = [
     {
       id: 1,
-      content: 'Visit the restaurants that you are excited about',
-      image: require('../images/CustWelcome1.jpeg')
+      content: 'Launch customized loyalty campaigns',
+      image: require('../images/RestWelcome1.jpeg')
     },
     {
       id: 2,
-      content: 'Collect rewards after you make your payment',
-      image: require('../images/CustWelcome2.jpeg')
+      content: 'Track customer spendings and your earnings',
+      image: require('../images/RestWelcome2.jpeg')
     },
     {
       id: 3,
-      content: 'Use your rewards instantly in CEATY network or other Web3 platforms (DeFi, NFT, Gaming)',
-      image: require('../images/CustWelcome3.jpeg')
+      content: 'Engage with your customers and offer exclusive benefits',
+      image: require('../images/RestWelcome3.jpeg')
     }
   ];
   
-  const CustomerScreen = () => {
+  const RestWelcome = () => {
     const navigation = useNavigation();
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -50,7 +50,7 @@ const data = [
   return (
     <View style={tw`flex-1 bg-yellow-100`}>
         <View style={{
-            flex: .75,
+            flex: .8,
             }}>
             <View style={{
                 flexDirection: "row",
@@ -63,11 +63,12 @@ const data = [
                         paddingTop: 10,
                         resizeMode: "contain",
                         alignSelf: "center",
+                        marginLeft: 20,
                 }}
                 source={require("../images/CEATY_Logo.png")}
             />
             <TouchableOpacity 
-                onPress={() => navigation.navigate('SignInScreen')}
+                onPress={() => navigation.navigate('RestSignIn')}
                 style={{
                     borderRadius: 20,
                     backgroundColor: "#EABBAE",
@@ -103,7 +104,7 @@ const data = [
                 })}
             </View>
             <TouchableOpacity 
-                onPress={() => navigation.navigate('SignUpScreen')}
+                onPress={() => navigation.navigate('RestSignUp')}
                 style={{
                     backgroundColor: "#FFA24C",
                     marginTop: 100,
@@ -161,4 +162,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CustomerScreen;
+export default RestWelcome;

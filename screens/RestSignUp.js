@@ -10,9 +10,9 @@ import { Component } from 'react';
 const db = getFirestore();
 
 
-async function addCustomer(name, pronouns, age, nationality, location) {
+async function addRestaurant(name, pronouns, age, nationality, location) {
     try {
-        const docRef = await addDoc(collection(db, "/customers"), {
+        const docRef = await addDoc(collection(db, "/restaurants"), {
             custName: name,
             custPronouns: pronouns,
             custAge: age,
@@ -25,14 +25,14 @@ async function addCustomer(name, pronouns, age, nationality, location) {
         }
 }
 
-export default class Signup extends Component{
+export default class RestSignUp extends Component{
 
     state = {
-        custName: '',
-        custPronouns: '',
-        custAge: '',
-        custNationality: '',
-        custLocation: '',
+        restName: '',
+        restPronouns: '',
+        restAge: '',
+        restNationality: '',
+        restLocation: '',
       };
 
       //const navigation = useNavigation()
@@ -53,7 +53,7 @@ export default class Signup extends Component{
       };
 
 
-      SignUpPressed = () => {
+      RestSignUpPressed = () => {
         const {custName, custPronouns, custAge, custNationality, custLocation} = this.state;
         if (
           custName == '' &&
@@ -64,7 +64,7 @@ export default class Signup extends Component{
         )
         {
             
-          this.props.navigation.navigate('CongratsScreen')
+          this.props.navigation.navigate('RestCongrats')
           //Alert.alert("Please Fill in the all Blanks");
         } 
        
@@ -72,7 +72,7 @@ export default class Signup extends Component{
           Keyboard.dismiss();
     
           //addCustomer(custName, custPronouns, custAge, custNationality, custLocation);
-          this.props.navigation.navigate('CongratsScreen')
+          this.props.navigation.navigate('RestCongrats')
           // navigates back to sign in page
             
         }
@@ -84,15 +84,15 @@ export default class Signup extends Component{
         
     return (
         
-        <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
+        <View style={tw`flex-1 bg-yellow-100`}>
         <View>
             <Image
                 style={{
                     width: 110,
                     height: 110,
+                    marginTop: 10,
                     resizeMode: "contain",
                     alignSelf: "center",
-                    marginTop: 0,
                 }}
                 source={require("../images/CEATY_Logo.png")}
             />
@@ -115,7 +115,7 @@ export default class Signup extends Component{
                 style={{
                     fontSize: 20,
                     paddingLeft: 20,
-                    paddingTop: 5,
+                    paddingTop: 15,
                 }}>Pronouns</Text>
             <TextInput
             style={tw`ml-5 mr-5 mt-1 bg-white text-left text-xl p-5 rounded-md`}
@@ -128,7 +128,7 @@ export default class Signup extends Component{
                 style={{
                     fontSize: 20,
                     paddingLeft: 20,
-                    paddingTop: 5,
+                    paddingTop: 15,
                 }}>Age</Text>
             <TextInput
             style={tw`ml-5 mr-5 mt-1 bg-white text-left text-xl p-5 rounded-md`}
@@ -141,7 +141,7 @@ export default class Signup extends Component{
                 style={{
                     fontSize: 20,
                     paddingLeft: 20,
-                    paddingTop: 5,
+                    paddingTop: 15,
                 }}>Nationality</Text>
             <TextInput
             style={tw`ml-5 mr-5 mt-1 bg-white text-left text-xl p-5 rounded-md`}
@@ -154,7 +154,7 @@ export default class Signup extends Component{
                 style={{
                     fontSize: 20,
                     paddingLeft: 20,
-                    paddingTop: 5,
+                    paddingTop: 15,
                 }}>Location</Text>
             <TextInput
             style={tw`ml-5 mr-5 mt-1 bg-white text-left text-xl p-5 rounded-md`}
@@ -186,7 +186,7 @@ export default class Signup extends Component{
                         <Text style={tw`text-black text-lg font-bold text-center`}>Connect your metamask wallet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    onPress={() => this.SignUpPressed()}
+                    onPress={() => this.RestSignUpPressed()}
                     style={{
                         backgroundColor: "#FFA24C",
                         marginTop: 20,
@@ -199,7 +199,7 @@ export default class Signup extends Component{
                 </TouchableOpacity>
             </SafeAreaView>
         </View>
-        </SafeAreaView>
+        </View>
     );
 }
 }

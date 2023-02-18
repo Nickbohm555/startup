@@ -9,11 +9,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SelectList } from 'react-native-dropdown-select-list';
+import CustTopBar from '../components/CustTopBar';
+import CustBottomBar from '../components/CustBottomBar';
 
 
 const CustRestaurantsScreen = () => {
     const navigation = useNavigation();
-    let taskItems = [{'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Five Guys', 'Reward': '5%', 'Cuisine': 'Burgers', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}];
+    let taskItems = [{'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Five Guys', 'Reward': '5%', 'Cuisine': 'Burgers', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}];
     
     const [selected, setSelected] = React.useState("");
     const data = [
@@ -36,84 +38,28 @@ const CustRestaurantsScreen = () => {
 
 
     return (
-        <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
-            <View style={{
-                flexDirection: "row",
-                backgroundColor: "#c5d4c9",
-                justifyContent: "space-around",
-                }}>
-                <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                    <ImageBackground
-                        source={(require("../images/drawerIcon.png"))}
-                        style={{width: 40, height: 40, paddingLeft: 175}}
-                        imageStyle={{borderRadius: 25}}
-                    />
-                </TouchableOpacity>
-                <Image
-                    style={{
-                        width: 75,
-                        height: 75,
-                        paddingTop: 10,
-                        resizeMode: "contain",
-                        alignSelf: "center",
-                    }}
-                    source={require("../images/CEATY_Logo.png")}
-                />
-                <View style={tw`mt-5 ml-10 mr-2 mb-5`}>
-                    <View style={tw`bg-white flex-row`}>
-                            <Image
-                            style={{
-                                width: 15,
-                                height: 15,
-                                paddingRight: 10,
-                                resizeMode: "contain",
-                                alignSelf: "center",
-                            }}
-                            source={require("../images/topBarIcon1.png")}
-                            />
-                        <Text style={{
-                            fontSize: 15,
-                            color: "black",
-                            fontWeight: "bold",
-                            textAlign: "right",
-                            paddingLeft: 5,
-                            paddingRight: 5,
-                            }}>0x000...1111</Text>
-                    </View>
-                    
-                    <View style={tw`bg-white flex-row mt-2`}>
-                            <Image
-                            style={{
-                                width: 15,
-                                height: 15,
-                                paddingRight: 10,
-                                resizeMode: "contain",
-                                alignSelf: "center",
-                            }}
-                            source={require("../images/topBarIcon2.png")}
-                            />
-                        <Text style={{
-                            fontSize: 15,
-                            color: "black",
-                            fontWeight: "bold",
-                            textAlign: "right",
-                            paddingLeft: 5,
-                            paddingRight: 5,
-                            }}>18.00</Text>
-                    </View>
-                </View>                    
-            </View>
+        <SafeAreaView style={tw`flex-1 bg-yellow-100`}>    
+            <View style={tw`absolute inset-x-0 top-0`}>
+                <CustTopBar />
+            </View>                            
             <Text style={{
                 fontSize: 20,
                 color: "black",
-                fontWeight: "bold",
                 paddingLeft: 20,
+                paddingTop: 70,
                 }}>Select Location</Text>
             <SelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
                 save="value"
-                boxStyles={{backgroundColor: 'white'}}
+                boxStyles={{
+                    backgroundColor: 'white',
+                    marginLeft: 10,
+                    marginRight: 10,
+                    marginTop: 10,
+                    paddingTop: 15,
+                    paddingBottom: 15,
+                    }}
             />
             <View style={tw`mt-5 bg-gray-300`}>
                 <Text style={{
@@ -121,12 +67,13 @@ const CustRestaurantsScreen = () => {
                 color: "black",
                 fontWeight: "bold",
                 textAlign: "center",
+                padding: 8,
                 }}>Restaurants in the city where you are located</Text>
             </View>
             <View style={{
                 flexDirection: "row",
                 justifyContent: "space-around",    
-                paddingTop: 5,
+                paddingTop: 10,
                 borderBottomColor: 'black',
                 borderBottomWidth: 2,
                 }}>
@@ -175,6 +122,9 @@ const CustRestaurantsScreen = () => {
             </View>
             </View>
             </ScrollView>  
+            <View style={tw`absolute inset-x-0 bottom-0`}>
+            <CustBottomBar />
+            </View>
         </SafeAreaView>
   );
 }

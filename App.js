@@ -4,10 +4,12 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SideTab from './navbar/SideTab';
 
 // Screens
 import HomeScreen from './screens/HomeScreen';
+
+// Customer Screens
 import CustomerScreen from './screens/CustomerScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import WalletScreen from './screens/WalletScreen';
@@ -26,6 +28,21 @@ import CustPayWithRewardsMetaMaskScreen from './screens/CustPayWithRewardsMetaMa
 import CustPaymentConfirmationScreen from './screens/CustPaymentConfirmationScreen';
 import CustHome from './screens/CustHome';
 import CustHelpScreen from './screens/CustHelpScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import CustTopBar from './components/CustTopBar';
+
+// Restaurant Screens
+import RestWelcome from './screens/RestWelcome';
+import RestSignUp from './screens/RestSignUp';
+import RestCongrats from './screens/RestCongrats';
+import RestSignIn from './screens/RestSignIn';
+import RestHome from './screens/RestHome';
+import RestHelpScreen from './screens/RestHelpScreen';
+import RestAccount from './screens/RestAccount';
+import RestLeaderboard from './screens/RestLeaderboard';
+import RestCampaigns from './screens/RestCampaigns';
+import RestCreateCampaign from './screens/RestCreateCampaign';
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +91,7 @@ const Stack = createNativeStackNavigator();
 
 
 export default function App() {
+  const Drawer = createDrawerNavigator();
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -83,21 +101,34 @@ export default function App() {
               name="HomeScreen" 
               component={HomeScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CustomerScreen" 
               component={CustomerScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
+
             <Stack.Screen 
               name="SignUpScreen" 
               component={SignUpScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen
+              name="CustTopBar"
+              component={CustTopBar}
+              options={{
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
@@ -105,6 +136,7 @@ export default function App() {
               component={WalletScreen} 
               options={{
                 headerShown: true,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
@@ -112,20 +144,31 @@ export default function App() {
               component={ConnectedWalletScreen} 
               options={{
                 headerShown: true,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CongratsScreen" 
               component={CongratsScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen 
+              name="SideTab" 
+              component={SideTab} 
+              options={{
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="SignInScreen" 
               component={SignInScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
@@ -133,55 +176,63 @@ export default function App() {
               component={DashboardScreen} 
               options={{
                 headerShown: true,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="RewardsScreen" 
               component={RewardsScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CustAccountScreen" 
               component={CustAccountScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CustRestaurantsScreen" 
               component={CustRestaurantsScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CustRankingsScreen" 
               component={CustRankingsScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CustRestaurantDetailsScreen" 
               component={CustRestaurantDetailsScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CustRequestConfirmationScreen" 
               component={CustRequestConfirmationScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
               name="CustPayWithRewardsScreen"
               component={CustPayWithRewardsScreen} 
               options={{
-                headerShown: true,
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
@@ -189,6 +240,7 @@ export default function App() {
               component={CustPayWithRewardsMetaMaskScreen} 
               options={{
                 headerShown: true,
+                // gestureEnabled: false,
               }}
             />
             <Stack.Screen 
@@ -196,20 +248,115 @@ export default function App() {
               component={CustPaymentConfirmationScreen} 
               options={{
                 headerShown: true,
+                // gestureEnabled: false,
               }}
             />
+        
             <Stack.Screen 
               name="CustHome"
-              component={CustHome} 
+              component={CustHome}
               options={{
-                headerShown: true,
+                headerShown: false,
+                gestureEnabled: false,
               }}
             />
+
             <Stack.Screen 
               name="CustHelpScreen"
               component={CustHelpScreen} 
               options={{
                 headerShown: true,
+                // gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestWelcome"
+              component={RestWelcome} 
+              options={{
+                headerShown: false,
+                // gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestSignUp"
+              component={RestSignUp} 
+              options={{
+                headerShown: false,
+                // gestureEnabled: false,
+              }}
+            />
+                        
+            <Stack.Screen 
+              name="RestCongrats"
+              component={RestCongrats} 
+              options={{
+                headerShown: false,
+                // gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestSignIn"
+              component={RestSignIn} 
+              options={{
+                headerShown: false,
+                // gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestHome"
+              component={RestHome} 
+              options={{
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestHelpScreen"
+              component={RestHelpScreen} 
+              options={{
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestAccount"
+              component={RestAccount} 
+              options={{
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestLeaderboard"
+              component={RestLeaderboard} 
+              options={{
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestCampaigns"
+              component={RestCampaigns} 
+              options={{
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+
+            <Stack.Screen 
+              name="RestCreateCampaign"
+              component={RestCreateCampaign} 
+              options={{
+                headerShown: false,
+                // gestureEnabled: false,
               }}
             />
           </Stack.Navigator>
