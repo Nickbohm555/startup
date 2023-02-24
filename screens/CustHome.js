@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
@@ -8,8 +7,32 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 
+// Supabase
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../supabase/supabase';
+import 'react-native-url-polyfill/auto';
+import { createClient } from '@supabase/supabase-js';
+
 const CustHome = () => {
     const navigation = useNavigation();
+
+    // Supabase
+    const [custInfo, setcustInfo] = useState([{"name": "", "pronoun": "", "customerage": "", "location": "", "walletaddress": "", "nationality": ""}]);
+
+    const getRestaurants = async () => {
+    let { data: custInfo, error } = await supabase
+      .from('customers')
+      .select('*')
+
+      return custInfo;
+    }
+    
+    useEffect(() => {
+        getRestaurants().then((custInfo) => {
+            setcustInfo(custInfo);
+        });
+      }, []);
+
     return (
         <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
             <View style={tw`absolute inset-x-0 top-0`}>
@@ -22,28 +45,28 @@ const CustHome = () => {
                         }}>
                         <Icon name="account" size={150} color="black" />
                 <View>
-                    <Text style={tw`p-1 text-2xl font-bold text-center`}>User Name</Text>
+                    <Text style={tw`p-1 text-2xl font-bold text-left`}>{custInfo[0]['name']}</Text>
                     <View style={{
                         flexDirection: "row",
-                        justifyContent: "center",
+                        justifyContent: "left",
                         }}>
                         <Icon name="gender-male-female" size={25} color="black" />
 
-                        <Text style={tw`text-lg text-center`}> Pronoun</Text>
+                        <Text style={tw`text-lg text-left`}>{custInfo[0]['pronoun']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",
-                        justifyContent: "center",
+                        justifyContent: "left",
                         }}>
                         <Icon2 name="location-on" size={25} color="black" />
-                        <Text style={tw`text-lg text-center`}> Location</Text>
+                        <Text style={tw`text-lg text-left`}>{custInfo[0]['location']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",
-                        justifyContent: "center",
+                        justifyContent: "left",
                         }}>
                         <Icon3 name="globe" size={20} color="black" />
-                        <Text style={tw`text-lg text-center`}> Nationality</Text>
+                        <Text style={tw`text-lg text-left`}> {custInfo[0]['nationality']}</Text>
                     </View>
                 </View>
             </View>

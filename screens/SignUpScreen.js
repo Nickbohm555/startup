@@ -9,6 +9,22 @@ import { collection, addDoc, getDocs, getFirestore } from "firebase/firestore";
 import { Component } from 'react';
 const db = getFirestore();
 
+// Supabase client
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+// import { createClient } from '@supabase/supabase-js'
+
+// const supabaseUrl = "https://umfmcmfxgpjabpofuvmq.supabase.co"
+// const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtZm1jbWZ4Z3BqYWJwb2Z1dm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzY4MjUzNTYsImV4cCI6MTk5MjQwMTM1Nn0.0ntTegonsaWB8Pct2ODsJ3sQOpczdBP8BFlS4j_Zi3Q"
+
+// export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+//   auth: {
+//     storage: AsyncStorage as any,
+//     autoRefreshToken: true,
+//     persistSession: true,
+//     detectSessionInUrl: false,
+//   },
+// })
+
 
 async function addCustomer(name, pronouns, age, nationality, location) {
     try {

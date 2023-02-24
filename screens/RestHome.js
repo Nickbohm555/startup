@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
@@ -8,8 +7,61 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 
+// Supabase
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../supabase/supabase';
+import 'react-native-url-polyfill/auto';
+import { createClient } from '@supabase/supabase-js';
+
+
 const RestHome = () => {
     const navigation = useNavigation();
+
+    // Supabase
+    const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phonenumber": "", "walletaddress": ""}]);
+    const [campaignInfo, setCampaignInfo] = useState([{"campaignId": "", "walletaddress": "", "name": "", 'date': '', 'budget': '', 'roi': '', 'revPercent': ''}]);
+    const [campaignTotal, setCampaignTotal] = useState([]);
+
+    const getRestaurants = async () => {
+    let { data: restInfo, error } = await supabase
+      .from('restaurants')
+      .select('*')
+
+      return restInfo;
+    }
+
+    const getCampaigns = async () => {
+    let { data: campaignInfo, error } = await supabase
+        .from('campaigns')
+        .select('*')
+    
+        return campaignInfo;
+    }
+
+    const getCampaignTotal = async () => {
+        const { data: count, error } = await supabase
+            .from('campaigns')
+            .select('*', { count: 'exact', head: true })
+        
+            return count;
+    }
+    
+    useEffect(() => {
+        getRestaurants().then((restInfo) => {
+            setRestInfo(restInfo);
+        });
+        getCampaigns().then((campaignInfo) => {
+            setCampaignInfo(campaignInfo);
+        });
+        getCampaignTotal().then((campaignTotal) => {
+            setCampaignTotal(campaignTotal);
+        });
+        
+      }, []);
+    
+    //console.log(campaignInfo)
+    console.log(campaignTotal)
+    
     return (
         <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
             <View style={tw`absolute inset-x-0 top-0`}>
@@ -24,20 +76,20 @@ const RestHome = () => {
                         <Image source={require('../images/FiveGuysLogo.png')} style={{width: 130, height: 130}} />
                         {/* <Icon name="account" size={150} color="black" /> */}
                 <View style={tw`ml-5`}>
-                    <Text style={tw`p-1 text-2xl font-bold text-center`}>Restaurant Name</Text>
+                    <Text style={tw`p-1 text-2xl font-bold text-left`}>{restInfo[0]['name']}</Text>
                     <View style={{
                         flexDirection: "row",
                         justifyContent: "left",
                         }}>
                         <Icon2 name="location-on" size={25} color="black" />
-                        <Text style={tw`text-lg text-left`}>Location</Text>
+                        <Text style={tw`text-lg text-left`}>{restInfo[0]['address']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",
                         justifyContent: "left",
                         }}>
                         <Icon name="silverware-fork-knife" size={20} color="black" />
-                        <Text style={tw`text-lg text-left`}>Cuisine</Text>
+                        <Text style={tw`text-lg text-left`}>{restInfo[0]['cuisine']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",

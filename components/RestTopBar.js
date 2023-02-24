@@ -4,14 +4,37 @@ import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView, TextInput, Keyboard, ImageBackground } from 'react-native';
 import CustRestaurantsRow from '../components/CustRestaurantsRow';
-import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+// Supabase
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../supabase/supabase';
+import 'react-native-url-polyfill/auto';
+import { createClient } from '@supabase/supabase-js';
+
 const RestTopBar = () => {
     const navigation = useNavigation();
+
+    // Supabase
+    const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phonenumber": "", "walletaddress": ""}]);
+
+    const getRestaurants = async () => {
+    let { data: Restaurants, error } = await supabase
+      .from('restaurants')
+      .select('*')
+
+      return Restaurants;
+    }
+    
+    useEffect(() => {
+        getRestaurants().then((Restaurants) => {
+            setRestInfo(Restaurants);
+        });
+      }, []);
+    
     return (
         <View style={{
             flexDirection: "row",
@@ -53,7 +76,7 @@ const RestTopBar = () => {
                         fontWeight: "bold",
                         textAlign: "right",
                         paddingLeft: 5,
-                        }}>0x000...1111</Text>
+                        }}>{restInfo[0]['walletaddress']}</Text>
                 </View>
             </View>                    
         </View>
