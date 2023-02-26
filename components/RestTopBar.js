@@ -8,32 +8,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/MaterialIcons";
-
-// Supabase
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabase/supabase';
-import 'react-native-url-polyfill/auto';
-import { createClient } from '@supabase/supabase-js';
 
 const RestTopBar = () => {
     const navigation = useNavigation();
-
-    // Supabase
-    const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phonenumber": "", "walletaddress": ""}]);
-
-    const getRestaurants = async () => {
-    let { data: Restaurants, error } = await supabase
-      .from('restaurants')
-      .select('*')
-
-      return Restaurants;
-    }
-    
-    useEffect(() => {
-        getRestaurants().then((Restaurants) => {
-            setRestInfo(Restaurants);
-        });
-      }, []);
     
     return (
         <View style={{
@@ -76,7 +54,7 @@ const RestTopBar = () => {
                         fontWeight: "bold",
                         textAlign: "right",
                         paddingLeft: 5,
-                        }}>{restInfo[0]['walletaddress']}</Text>
+                        }}>0001..1101</Text>
                 </View>
             </View>                    
         </View>
