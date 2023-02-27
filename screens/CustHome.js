@@ -6,32 +6,10 @@ import CustBottomBar from '../components/CustBottomBar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
-
-// Supabase
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabase/supabase';
-import 'react-native-url-polyfill/auto';
-import { createClient } from '@supabase/supabase-js';
 
 const CustHome = () => {
     const navigation = useNavigation();
-
-    // Supabase
-    const [custInfo, setcustInfo] = useState([{"name": "", "pronoun": "", "customerage": "", "location": "", "walletaddress": "", "nationality": ""}]);
-
-    const getRestaurants = async () => {
-    let { data: custInfo, error } = await supabase
-      .from('customers')
-      .select('*')
-
-      return custInfo;
-    }
-    
-    useEffect(() => {
-        getRestaurants().then((custInfo) => {
-            setcustInfo(custInfo);
-        });
-      }, []);
 
     return (
         <SafeAreaView style={tw`flex-1 bg-yellow-100`}>

@@ -1,9 +1,4 @@
-// Supabase
 import React, { useEffect } from 'react';
-import { supabase } from './supabase/supabase';
-import 'react-native-url-polyfill/auto'
-import { createClient } from '@supabase/supabase-js'
-
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
@@ -97,14 +92,6 @@ const Stack = createNativeStackNavigator();
 
 
 export default function App() {
-
-   // Supabase
-   //const AddProfiles = async () => {
-   // let {} = await supabase
-   // .from('profiles')
-  //  .insert([
-  //    { name: 'Mona'},
-   // ])};
   
   const Drawer = createDrawerNavigator();
   

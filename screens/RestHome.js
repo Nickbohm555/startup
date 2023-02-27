@@ -8,8 +8,44 @@ import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import React, { useEffect, useState } from 'react';
 
+// Firebase
+import { firebase } from '../database/config';
+import { query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore();
+
 const RestHome = () => {
     const navigation = useNavigation();
+
+    const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phoneNumber": "", "walletAddress": ""}]);
+    const [campaign, setCampaign] = useState([])
+
+    useEffect(() => {
+
+        const getCampaignInfo = async () => {
+            const campaign = await getDocs(collection(db, "/campaigns"), where('walletAddress', '==', '1234567890@example.com'));
+            setCampaign(campaign.docs.map(doc => doc.data()));
+        }
+
+        const getRestInfo = async () => {
+            const restInfo = await getDocs(collection(db, "/restaurants"), where('email', '==', 'fiveGuys@example.com'));
+            setRestInfo(restInfo.docs.map(doc => doc.data()));
+        }
+        getRestInfo();
+        getCampaignInfo();
+
+    }, []);
+
+    console.log(restInfo);
+    console.log(campaign)
+    var length = campaign.length
+    var budget = 0
+    var roi = 0
+    for (var i = 0; i < length; i++) {
+        budget += campaign[i]['budget']
+        roi += campaign[i]['roi']
+    }
+    roi = roi / length
     
     return (
         <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
@@ -25,20 +61,20 @@ const RestHome = () => {
                         <Image source={require('../images/FiveGuysLogo.png')} style={{width: 130, height: 130}} />
                         {/* <Icon name="account" size={150} color="black" /> */}
                 <View style={tw`ml-5`}>
-                    <Text style={tw`p-1 text-2xl font-bold text-left`}>Name</Text>
+                    <Text style={tw`p-1 text-2xl font-bold text-left`}>{restInfo[0]['name']}</Text>
                     <View style={{
                         flexDirection: "row",
                         justifyContent: "left",
                         }}>
                         <Icon2 name="location-on" size={25} color="black" />
-                        <Text style={tw`text-lg text-left`}>Location</Text>
+                        <Text style={tw`text-lg text-left`}>{restInfo[0]['address']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",
                         justifyContent: "left",
                         }}>
                         <Icon name="silverware-fork-knife" size={20} color="black" />
-                        <Text style={tw`text-lg text-left`}>Cuisine</Text>
+                        <Text style={tw`text-lg text-left`}>{restInfo[0]['cuisine']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",
@@ -62,7 +98,7 @@ const RestHome = () => {
                     <Text style={{
                         fontSize: 70,
                         color: "green",
-                        }}>5</Text>
+                        }}>{length}</Text>
                     <Text style={{
                         fontSize: 70,
                         color: "green",
@@ -92,11 +128,11 @@ const RestHome = () => {
                     <Text style={{
                         fontSize: 70,
                         color: "green",
-                        }}>$10k</Text>
+                        }}>${budget}</Text>
                     <Text style={{
                         fontSize: 70,
                         color: "green",
-                        }}>7.2x</Text>
+                        }}>{roi}x</Text>
             </View>
             <View style={{
                         flexDirection: "row",
