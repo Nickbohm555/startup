@@ -17,6 +17,7 @@ const db = getFirestore();
 const RestHome = () => {
     const navigation = useNavigation();
 
+    // Firebase
     const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phoneNumber": "", "walletAddress": ""}]);
     const [campaign, setCampaign] = useState([])
 
@@ -36,8 +37,6 @@ const RestHome = () => {
 
     }, []);
 
-    console.log(restInfo);
-    console.log(campaign)
     var length = campaign.length
     var budget = 0
     var roi = 0

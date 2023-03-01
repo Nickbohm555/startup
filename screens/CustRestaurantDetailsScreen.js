@@ -10,6 +10,7 @@ import Icon2 from 'react-native-vector-icons/MaterialIcons';
 const CustRestaurantDetailsScreen = ({route}) => {
     const navigation = useNavigation();
     const restaurantInfo  = route.params['company'];
+    console.log("rest info", restaurantInfo);
     return (
             
         <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
@@ -29,14 +30,14 @@ const CustRestaurantDetailsScreen = ({route}) => {
                 source={require('../images/FiveGuysLogo.png')}
                     />
                 <View>
-                    <Text style={tw`p-1 text-2xl font-bold text-left`}>{restaurantInfo['Name']}</Text>
+                    <Text style={tw`p-1 text-2xl font-bold text-left`}>{restaurantInfo['name']}</Text>
                     <View style={{
                         flexDirection: "row",
                         justifyContent: "left",
                         }}>
                         <Icon2 name="location-on" size={25} color="black" />
                        {/* {restaurantInfo['MapsLink']} */}
-                       <Text style={tw`text-lg text-left`}>Location</Text>
+                       <Text style={tw`text-lg text-left`}>{restaurantInfo['address']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",
@@ -44,7 +45,7 @@ const CustRestaurantDetailsScreen = ({route}) => {
                         }}>
                         <Icon name="silverware-fork-knife" size={25} color="black" />
                     {/* {restaurantInfo['Cuisine']} */}
-                        <Text style={tw`text-lg text-left`}>Cuisine</Text>
+                        <Text style={tw`text-lg text-left`}>{restaurantInfo['cuisine']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",

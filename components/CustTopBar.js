@@ -11,8 +11,26 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useEffect, useState } from 'react';
 
+// Firebase
+import { firebase } from '../database/config';
+import { query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore();
+
 const CustTopBar = () => {
     const navigation = useNavigation();
+
+    // Firebase
+    const [custInfo, setCustInfo] = useState([{"customerAge": "", "location": "", "name": "", "nationality": "", "pronouns": "", "walletAddress": ""}]);
+
+    useEffect(() => {
+
+        const getCustInfo = async () => {
+            const custInfo = await getDocs(collection(db, "/customers"), where('name', '==', 'Nick Bohm'));
+            setCustInfo(custInfo.docs.map(doc => doc.data()));
+        }
+        getCustInfo();
+    }, []);
 
     return (
         <View style={{
@@ -55,7 +73,7 @@ const CustTopBar = () => {
                         fontWeight: "bold",
                         textAlign: "right",
                         paddingLeft: 5,
-                        }}>{custInfo[0]['walletaddress']}</Text>
+                        }}>{custInfo[0]['walletAddress']}</Text>
                 </View>
                 
                 <View style={tw`bg-white flex-row mt-2`}>

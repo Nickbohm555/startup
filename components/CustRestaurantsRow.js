@@ -12,33 +12,33 @@ const CustRestaurantsRow = (props) => {
                 flexDirection: "row",
                 justifyContent: "space-around",
                 }}>
-        <Image
+        {/* <Image
             style={{
                 width: 25,
                 height: 25,
             }}
-            source={{ uri: 'https://w7.pngwing.com/pngs/913/146/png-transparent-blue-bottle-coffee-logo-iced-coffee-cafe-single-origin-coffee-blue-bottle-coffee-company-blue-bottle-blue-company-text.png'}}
-        />
+            //source={{ uri: 'https://w7.pngwing.com/pngs/913/146/png-transparent-blue-bottle-coffee-logo-iced-coffee-cafe-single-origin-coffee-blue-bottle-coffee-company-blue-bottle-blue-company-text.png'}}
+        /> */}
         <Text style={{
                     fontSize: 15,
                     color: "black",
-                    }}>{props['object']['Name']}</Text>
+                    }}>{props['object']['name']}</Text>
         <Text style={{
                     fontSize: 15,
                     color: "black",
                     paddingLeft: 30,
-                    }}>{props['object']['Reward']}</Text>
+                    }}>reward</Text>
         <Text style={{
                     fontSize: 15,
                     color: "black",
                     paddingLeft: 60,
-                    }}>{props['object']['Cuisine']}</Text>
+                    }}>{props['object']['cuisine']}</Text>
         <Text style={{
                     fontSize: 15,
                     color: "blue",
                     paddingLeft: 40,
                     textDecorationLine: 'underline',
-                    }}>{props['object']['MapsLink']}</Text>
+                    }}>{props['object']['city']}</Text>
       </View>
     </View>
   )

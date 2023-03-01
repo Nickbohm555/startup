@@ -4,20 +4,37 @@ import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView, TextInput, Keyboard, ImageBackground } from 'react-native';
 import CustRestaurantsRow from '../components/CustRestaurantsRow';
-import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SelectList } from 'react-native-dropdown-select-list';
 import CustTopBar from '../components/CustTopBar';
 import CustBottomBar from '../components/CustBottomBar';
+import React, { useEffect, useState } from 'react';
 
+// Firebase
+import { firebase } from '../database/config';
+import { query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore();
 
 const CustRestaurantsScreen = () => {
     const navigation = useNavigation();
-    let taskItems = [{'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Five Guys', 'Reward': '5%', 'Cuisine': 'Burgers', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}, {'Name': 'Blue Bottle', 'Reward': '2%', 'Cuisine': 'Coffee', 'MapsLink': 'Location'}];
-    
     const [selected, setSelected] = React.useState("");
+
+    // Firebase
+    const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phoneNumber": "", "walletAddress": "", "city": ""}]);
+    const [rest, setRest] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phoneNumber": "", "walletAddress": "", "city": ""}]);
+
+    useEffect(() => {
+
+        const getRestInfo = async () => {
+            const restInfo = await getDocs(collection(db, "/restaurants"), where('name', '==', "Five Guys"));
+            setRestInfo(restInfo.docs.map(doc => doc.data()));
+        }
+        getRestInfo();
+    }, []);
+
     const data = [
         {key:'1', value:'New York'},
         {key:'2', value:'Boston'},
@@ -31,7 +48,7 @@ const CustRestaurantsScreen = () => {
     ]
 
     const completeTask = (index) => {
-        let company_info = taskItems[index];
+        let company_info = restInfo[index];
     
         navigation.navigate('CustRestaurantDetailsScreen', {company: company_info});
     }
@@ -96,7 +113,7 @@ const CustRestaurantsScreen = () => {
                     fontSize: 15,
                     color: "black",
                     fontWeight: "bold",
-                    }}>Maps Link</Text>
+                    }}>City</Text>
             </View>
             <ScrollView
             contentContainerStyle={{
@@ -108,7 +125,7 @@ const CustRestaurantsScreen = () => {
             <View style={styles.items}>
             
             {
-                taskItems.map((item, index) => {
+                restInfo.map((item, index) => {
                 
                     return (
                     // {onPress={() => completeTask(index)}}

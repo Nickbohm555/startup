@@ -10,8 +10,26 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import React, { useEffect, useState } from 'react';
 
+// Firebase
+import { firebase } from '../database/config';
+import { query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore();
+
 const RestTopBar = () => {
     const navigation = useNavigation();
+
+    // Firebase
+    const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phoneNumber": "", "walletAddress": ""}]);
+
+    useEffect(() => {
+
+        const getRestInfo = async () => {
+            const restInfo = await getDocs(collection(db, "/restaurants"), where('email', '==', 'fiveGuys@example.com'));
+            setRestInfo(restInfo.docs.map(doc => doc.data()));
+        }
+        getRestInfo();
+    }, []);
     
     return (
         <View style={{
@@ -54,7 +72,7 @@ const RestTopBar = () => {
                         fontWeight: "bold",
                         textAlign: "right",
                         paddingLeft: 5,
-                        }}>0001..1101</Text>
+                        }}>{restInfo[0]['walletAddress']}</Text>
                 </View>
             </View>                    
         </View>

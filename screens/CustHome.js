@@ -8,8 +8,81 @@ import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import React, { useEffect, useState } from 'react';
 
+// Firebase
+import { firebase } from '../database/config';
+import { query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getFirestore } from "firebase/firestore";
+const db = getFirestore();
+
 const CustHome = () => {
     const navigation = useNavigation();
+
+    // Firebase
+    const [custInfo, setCustInfo] = useState([{"customerAge": "", "location": "", "name": "", "nationality": "", "pronouns": "", "walletAddress": ""}]);
+    const [transactionInfo, setTransactionInfo] = useState([{"customerAge": "", "location": "", "name": "", "nationality": "", "pronouns": "", "walletAddress": "", "returnOnSpending": ""}]);
+    const [restInfo, setRestInfo] = useState([{"address": "", "cuisine": "", "email": "", "name": "", "phoneNumber": "", "walletAddress": ""}]);
+
+    useEffect(() => {
+
+        const getCustInfo = async () => {
+            const custInfo = await getDocs(collection(db, "/customers"), where('name', '==', 'Nick Bohm'));
+            setCustInfo(custInfo.docs.map(doc => doc.data()));
+        }
+        const getTransactionInfo = async () => {
+            const transactionInfo = await getDocs(collection(db, "/transactions"), where('customerAddress', '==', '3234567890'));
+            setTransactionInfo(transactionInfo.docs.map(doc => doc.data()));
+        }
+        const getRestInfo = async () => {
+            const restInfo = await getDocs(collection(db, "/restaurants"), where('walletAddress', '==', mostVisited(restVisited)));
+            setRestInfo(restInfo.docs.map(doc => doc.data()));
+        }
+        getCustInfo();
+        getTransactionInfo();
+        getRestInfo();
+    }, []);
+    console.log(transactionInfo)
+    
+    var totalRewards = 0
+    for (var i = 0; i < transactionInfo.length; i++) {
+        totalRewards += transactionInfo[i]['rewardsEarned']
+    }
+    var totalSpent = 0
+    var restVisited = []
+    const totalVisited = new Set()
+    for (var i = 0; i < transactionInfo.length; i++) {
+        totalSpent += transactionInfo[i]['totalSpent']
+        restVisited.push(transactionInfo[i]['restAddress'])
+        totalVisited.add(transactionInfo[i]['restAddress'])
+    }
+    function mostVisited(array)
+    {
+        if(array.length == 0)
+            return null;
+        var modeMap = {};
+        var maxEl = array[0], maxCount = 1;
+        for(var i = 0; i < array.length; i++)
+        {
+            var el = array[i];
+            if(modeMap[el] == null)
+                modeMap[el] = 1;
+            else
+                modeMap[el]++;  
+            if(modeMap[el] > maxCount)
+            {
+                maxEl = el;
+                maxCount = modeMap[el];
+            }
+        }
+        return maxEl;
+    }
+    var topVisitedRest = mostVisited(restVisited)
+
+    // average return on spending
+    var totalReturn = 0
+    for (var i = 0; i < transactionInfo.length; i++) {
+        totalReturn += transactionInfo[i]['returnOnSpending']
+    }
+    var avgReturn = totalReturn / transactionInfo.length
 
     return (
         <SafeAreaView style={tw`flex-1 bg-yellow-100`}>
@@ -30,7 +103,7 @@ const CustHome = () => {
                         }}>
                         <Icon name="gender-male-female" size={25} color="black" />
 
-                        <Text style={tw`text-lg text-left`}>{custInfo[0]['pronoun']}</Text>
+                        <Text style={tw`text-lg text-left`}>{custInfo[0]['pronouns']}</Text>
                     </View>
                     <View style={{
                         flexDirection: "row",
@@ -44,7 +117,7 @@ const CustHome = () => {
                         justifyContent: "left",
                         }}>
                         <Icon3 name="globe" size={20} color="black" />
-                        <Text style={tw`text-lg text-left`}> {custInfo[0]['nationality']}</Text>
+                        <Text style={tw`text-lg text-left`}>{custInfo[0]['nationality']}</Text>
                     </View>
                 </View>
             </View>
@@ -61,11 +134,11 @@ const CustHome = () => {
                     <Text style={{
                         fontSize: 70,
                         color: "green",
-                        }}>28</Text>
+                        }}>{totalVisited.size}</Text>
                     <Text style={{
                         fontSize: 70,
                         color: "green",
-                        }}>$63</Text>
+                        }}>${totalRewards}</Text>
             </View>
             <View style={{
                         flexDirection: "row",
@@ -91,11 +164,11 @@ const CustHome = () => {
                     <Text style={{
                         fontSize: 70,
                         color: "green",
-                        }}>$1.4k</Text>
+                        }}>${totalSpent}</Text>
                     <Text style={{
                         fontSize: 70,
                         color: "green",
-                        }}>4%</Text>
+                        }}>{avgReturn}%</Text>
             </View>
             <View style={{
                         flexDirection: "row",
@@ -125,6 +198,10 @@ const CustHome = () => {
                         }}
                         source={{ uri: 'https://w7.pngwing.com/pngs/913/146/png-transparent-blue-bottle-coffee-logo-iced-coffee-cafe-single-origin-coffee-blue-bottle-coffee-company-blue-bottle-blue-company-text.png'}}
                     />
+                    <Text style={{
+                        fontSize: 20,
+                        color: "green",
+                        }}>{restInfo[0]['name']}</Text>
                     <Text style={{
                         fontSize: 70,
                         color: "green",
