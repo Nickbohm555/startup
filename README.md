@@ -44,3 +44,20 @@
 - make and commit changes (git add . git commit -m '')
 - 'git push' to make changes in github
 - go to project, click contribute and open pull request.
+
+
+Problem Statement Slide:
+Title: Creation of AI Strategy and Roadmap for a Custom LLM
+Problem:
+The Chief Technology Officer (CTO) of XYZ Bank has been tasked by the CEO to explore the potential of generative AI (Artificial Intelligence) and develop a winning strategy around it. The CEO was impressed by the possibilities of generative AI after their grandchild used it for homework. The CTO needs to address the following key questions:
+* 		New Risks: What types of new risks will the bank face if it starts using generative AI?
+* 		Competitive Differentiation: How can the bank stand out among competitors and those utilizing pre-existing generative AI models like GPT (Generative Pre-trained Transformer)?
+* 		Implementation Recommendations: Should the bank implement generative AI for key processes and customer communications? What are the reasons for or against it?
+Objectives:
+The CTO seeks an AI strategy that focuses on proprietary Large Language Models (LLMs) to position XYZ Bank as a leader with differentiated AI capabilities. The following considerations should be addressed:
+* 		Major LLMs Overview: Summarize the pros and cons of major LLMs currently available in the market.
+* 		Resource Requirements: Explore the necessary resources for fine-tuning or developing a custom LLM.
+* 		Research and Strategy: Conduct extensive research on rapidly evolving generative AI technology and develop a comprehensive strategy and action plan.
+* 		Deliverable: Create a PowerPoint presentation with findings, including supporting datasets, Python libraries, development techniques, necessary architectures, and relevant examples.
+* 		Success Criteria: Success will be measured based on the effectiveness in addressing the CTO's questions, the quality of the roadmap, and the likelihood of PwC being considered for a second phase of implementation assistance.
+Note: While the CTO does not require a custom LLM, understanding the requirements for building one would be highly beneficial.
